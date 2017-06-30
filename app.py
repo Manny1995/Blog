@@ -4,8 +4,8 @@ from flask import send_from_directory
 import os
 
 
-from flask_admin import Admin
-from flask_admin.contrib.peewee import ModelView
+# from flask_admin import Admin
+# from flask_admin.contrib.peewee import ModelView
 
 from models import Post
 import post_db
@@ -22,8 +22,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['SECRET_KEY'] = '123456790'
 
-admin = Admin(app, name='microblog', template_mode='bootstrap3')
-admin.add_view(ModelView(Post))
+# admin = Admin(app, name='microblog', template_mode='bootstrap3')
+# admin.add_view(ModelView(Post))
 
 
 
