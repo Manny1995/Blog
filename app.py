@@ -30,13 +30,25 @@ app.config['SECRET_KEY'] = '123456790'
 @app.route('/') # the route decorator binds a function to a url
 def home_page():
 	post_list = post_db.select_page()
-	return render_template('index.html', post_list=post_list)
+	return render_template('index.html', post_list=post_list, next_link="/page/2", prev_link=None)
 
 
-@app.route('/page/<pageno>')
+@app.route('/page/<page_no>')
 def get_page(page_no):
-	post_db.select_page(page_no)
-	return "Success"
+	page_no = int(page_no)
+	post_list = post_db.select_page(page_no)
+	prev_link = '/page/' + str(page_no - 1)
+	next_link = '/page/' + str(page_no + 1)
+
+	next_list = post_db.select_page(page_no + 1)
+
+	if page_no - 1 == 0:
+		prev_link = None
+
+	if len(next_list) == 0:
+		next_link = None
+
+	return render_template('index.html', post_list=post_list, next_link=next_link, prev_link=prev_link)
 
 
 @app.route('/api/delete/<post_id>', methods=['POST'])
@@ -68,7 +80,6 @@ def insert_post():
 
 
 if __name__ == '__main__':
-	print "ad"
 	# Bind to PORT if defined, otherwise default to 5000.
 	port = int(os.environ.get('PORT', 5000))
 	app.run(host='0.0.0.0', port=port)

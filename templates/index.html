@@ -1,115 +1,138 @@
 <!DOCTYPE html>
 
 <html>
-<head>
+	<head>
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<title>Manny's Blog</title>
-	<style>
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<title>Manny's Blog</title>
+		<style>
 
-		body {
-			font-family: 'Roboto', sans-serif;
-			width: 40%;
-			height: auto;
+			body {
+				font-family: 'Roboto', sans-serif;
+				width: 40%;
+				height: auto;
 
-			margin-left: auto;
-			margin-right: auto;
-			float: center;
-		}
+				margin-left: auto;
+				margin-right: auto;
+				float: center;
+			}
 
-		.title h2 {
-			margin: 0px;
-		}
+			.title h2 {
+				margin: 0px;
+			}
 
-		.title h3 {
-			margin: 0px;
-			color: #C5C5C5;
-		}
+			.title h3 {
+				margin: 0px;
+				color: #C5C5C5;
+			}
 
-		h1 {
-			font-size: 30pt;
-		}
+			h1 {
+				font-size: 30pt;
+			}
 
-		h2 {
-			font-size: 20pt;
-		}
+			h2 {
+				font-size: 20pt;
+			}
 
-		h3 {
-			font-size: 14pt;
-		}
-		
-		.title {
-			margin-bottom: 18pt;
-			height: 20%;
-		}
-
-		.description {
-			font-size: 14pt;
-			line-height: 25pt;
-		}
-
-		.card {
+			h3 {
+				font-size: 14pt;
+			}
 			
-    		border-bottom: 1px #E7E7E7 solid;
-    		padding-top: 35px;
-    		padding-bottom: 35px;
-		}
+			.title {
+				margin-bottom: 18pt;
+				height: 20%;
+			}
 
-		.screenshot {
-			width: 700px;
-			height: auto;
-		}
+			.description {
+				font-size: 14pt;
+				line-height: 25pt;
+			}
 
-		img {
-			max-width: 100%;
-			text-align: center;
-			margin-left: auto;
-			margin-right: auto;
-			float: center;
-			border-radius: 10px;
-			border-width: 1px;
-			border-style: solid;
-			border-color: #E7E7E7;
-		}
+			.card {
+				
+	    		border-bottom: 1px #E7E7E7 solid;
+	    		padding-top: 35px;
+	    		padding-bottom: 35px;
+			}
 
+			.screenshot {
+				width: 700px;
+				height: auto;
+			}
 
-		.footer a {
-			text-decoration: none;
-			color: #4A90E2;
-			font-size: 14pt;
-		}
-
-	</style>
-</head>
-
-<body>
-
-	<div class="card">
-		<h1>Immanuel Amirtharaj</h1>
-		<h3>Check on what I'm working on!</h3>
-	</div>
+			img {
+				max-width: 100%;
+				text-align: center;
+				margin-left: auto;
+				margin-right: auto;
+				float: center;
+				border-radius: 10px;
+				border-width: 1px;
+				border-style: solid;
+				border-color: #E7E7E7;
+			}
 
 
-	{% for post in post_list %}
-		<article class="card">
-			<div class="title">
-				<h2> {{ post.title }}</h2>
-				<h3> {{post.date }} </h3>
-			</div>
-			<div class="description">
-				<img class="screenshot" src = {{ post.image }}> 
-				<p> {{ post.body }} </p>
-			</div>
+			.footer a {
+				text-decoration: none;
+				color: #4A90E2;
+				font-size: 14pt;
+			}
 
 
-			<div class="footer">
-				<a href= {{ post.link }} >View Source</a>
-			</div>
-		</article>
+			.prevNext {
+				text-align: center;
+				padding-top: 35px;
+				padding-bottom: 35px;
+			}
 
-	{% endfor %}
+			.prevNext a {
+				text-decoration: none;
+				color: #C5C5C5;
+				font-size: 14pt;
+				margin: 10%;
+			}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div class="card">
+			<h1>Immanuel Amirtharaj</h1>
+			<h3>Check on what I'm working on!</h3>
+		</div>
 
 
-</body>
+		{% for post in post_list %}
+			<article class="card">
+				<div class="title">
+					<h2> {{ post.title }}</h2>
+					<h3> {{post.date }} </h3>
+				</div>
+				<div class="description">
+					<img class="screenshot" src = {{ post.image }}> 
+					<p> {{ post.body }} </p>
+				</div>
+
+
+				<div class="footer">
+					<a href= {{ post.link }} >View Source</a>
+				</div>
+			</article>
+
+		{% endfor %}
+
+		<div class="prevNext">
+			{% if prev_link is not none %}
+				<a href = {{ prev_link }} >< Previous</a>
+			{% endif %}
+			{% if next_link is not none %}
+				<a href = {{ next_link }} >Next > </a>
+			{% endif %}
+		</div>
+
+
+	</body>
 
 </html>

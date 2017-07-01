@@ -39,8 +39,8 @@ def select_article(page_no):
 
 
 def select_page(offset=0):
-	offset = int(offset) 
-	post_list = Post.select().paginate(offset, 4)
+	offset = int(offset)
+	post_list = Post.select().order_by(Post.id.desc()).paginate(offset, 3)
 	teardown()
 	return post_list
 
