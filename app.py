@@ -23,7 +23,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 @app.route('/') # the route decorator binds a function to a url
 def home_page():
 	post_list = post_db.select_page()
-	return render_template('index.html', post_list=post_list, next_link="/page/2", prev_link=None)
+	return redirect('/page/1')
 
 
 @app.route('/login', methods=['GET', 'POST'])
