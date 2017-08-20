@@ -15,7 +15,6 @@ def teardown():
 		db.close()
 
 
-
 class Post(Model):
 	title = CharField()
 	image = CharField()
