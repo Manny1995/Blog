@@ -38,14 +38,14 @@ def has_prev(current_page):
 	return current_page > 1
 
 def has_next(current_page):
-	post_list = Post.select().order_by(Post.id.desc()).paginate(current_page + 1, PAGE_SIZE)
+	post_list = Post.select().order_by(Post.date.desc()).paginate(current_page + 1, PAGE_SIZE)
 
 	return len(post_list) > 0
 
 
 def select_page(offset=0):
 	offset = int(offset)
-	post_list = Post.select().order_by(Post.id.desc()).paginate(offset, PAGE_SIZE)
+	post_list = Post.select().order_by(Post.date.desc()).paginate(offset, PAGE_SIZE)
 	teardown()
 	return post_list
 
