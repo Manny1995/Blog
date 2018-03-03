@@ -3,8 +3,11 @@
 from flask import Flask, request, render_template
 from flask import send_from_directory
 from flask import redirect
+from playhouse.shortcuts import model_to_dict, dict_to_model
 
 import os
+
+import json
 
 
 from models import Post
@@ -56,6 +59,13 @@ def get_page(page_no):
 		next_link = None
 
 	return render_template('index.html', post_list=post_list, next_link=next_link, prev_link=prev_link)
+
+
+@app.route('/api/posts/<page_no>')
+def posts_for_page(page_no):
+	page_no = int(page_no)
+	post_list = post_db.select_page_json(page_no)
+	return json.dumps(post_list)
 
 
 @app.route('/posts/new', methods=['GET', 'POST'])

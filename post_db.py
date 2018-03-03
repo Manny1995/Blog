@@ -3,6 +3,9 @@ import peewee
 import uuid
 import urllib
 import os
+import json
+import datetime
+from playhouse.shortcuts import model_to_dict, dict_to_model
 
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -42,6 +45,19 @@ def has_next(current_page):
 
 	return len(post_list) > 0
 
+
+def select_page_json(offset=0):
+	offset = int(offset)
+	post_list = Post.select().order_by(Post.date.desc()).paginate(offset, PAGE_SIZE)
+
+	json.JSONEncoder.default = lambda self,obj: (obj.isoformat() if isinstance(obj, datetime.datetime) else None)
+
+	res = []
+	for i in range(0, len(post_list)):
+		res.append(model_to_dict(post_list[i], exclude=["date"]))
+
+	teardown()
+	return res
 
 def select_page(offset=0):
 	offset = int(offset)
