@@ -4,6 +4,8 @@ from flask import Flask, request, render_template
 from flask import send_from_directory
 from flask import redirect
 from playhouse.shortcuts import model_to_dict, dict_to_model
+from flask_cors import CORS
+
 
 import os
 
@@ -21,6 +23,9 @@ UPLOAD_FOLDER = os.path.join(APP_ROOT, 'images')
 app = Flask(__name__)	# ceate an instance of Flask
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+CORS(app)
+
 
 
 @app.route('/') # the route decorator binds a function to a url
