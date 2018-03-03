@@ -56,6 +56,7 @@ def select_page_json(offset=0):
 	for i in range(0, len(post_list)):
 		res.append(model_to_dict(post_list[i], exclude=["date"]))
 
+	res = {'data' : res}
 	teardown()
 	return res
 
